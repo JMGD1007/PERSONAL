@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang=”en”>
+
+<head>
+    <meta charset=”UTF-8″ />
+    <title>Document</title>
+    <link rel="stylesheet" href="estilos.css">
+    <script src="https://kit.fontawesome.com/b408879b64.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <section class="search">
+        <div class="buscador">
+            <input type="text" class="barra_search" id="input">
+            <button id="buttom_search"> Buscar
+                <i class="fa-solid fa-magnifying-glass"> </i>
+            </button>
+        </div>
+    </section>
+    <div class="contenedor">
+        <div class="contenedor1">
+            <section class="canciones">
+                <div class="resultados" id="resultados">
+                    <h2> Catálogo </h2>
+                        <button class="fa-solid fa-play" id="play-btn"></button>
+                        <button class="fa-solid fa-heart" id="fav-btn"></button>
+                        <button class="fa-solid fa-plus" id="add-btn"></button>
+                </div>
+
+            </section>
+            <section class="myplaylist" >
+                <div class="resultados" id="myplaylist">
+                    <h2> Mis Favoritos </h2>
+                        <button class="fa-solid fa-play" id="play-btn"></button>
+                        <button class="fa-solid fa-heart" id="fav-btn"></button>
+                        <button class="fa-solid fa-trash" id="trash-btn"></button>
+                </div>
+            </section>
+            <section class="favoritos">
+                <div class="resultados" id="favoritos">
+                    <h2> My Playlist </h2>
+                        <button class="fa-solid fa-play" id="play-btn"></button>
+                        <button class="fa-solid fa-heart" id="fav-btn"></button>
+                        <button class="fa-solid fa-plus" id="add-btn"></button>
+                </div>
+            </section>
+
+        </div>
+        <div class="contenedor2">
+            <div class="portada" id="portada">
+                Portada
+            </div>
+            <div class="info">
+                Nombre:
+                <br>
+                Artista:
+                <br>
+                Año:
+                <br>
+                Duración:
+                <br>
+                Género:
+            </div>
+            <div class="botones_reproduccion">
+                <button class="fa-solid fa-backward" id="antes-btn"></button>
+                <button class="fa-solid fa-play" id="play-btn1"></button>
+                <button class="fa-solid fa-forward" id="adel-btn"></button>
+                <button class="fa-solid fa-stop" id="stop-btn"></button>
+                <button class="fa-solid fa-volume-high" id="loud-btn"></button>
+                <button class="fa-solid fa-volume-xmark" id="mute-btn"></button>
+            </div>
+
+            <div id="audioContainer">
+                <audio id="audioPlayer"></audio>
+            </div>
+        </div>
+    </div>
+
+    <script src="reproductormusica.js"></script>
+
+</body>
+
+</html>

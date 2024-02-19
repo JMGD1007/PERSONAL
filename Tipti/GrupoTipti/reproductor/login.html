@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Reproductor de Música</title>
+</head>
+
+<body>
+    <section class="page1">
+        <div class="title1">Reproductor de Música</div>
+        <div class="title2">Ingrese su usuario:</div>
+        <input type="email" id="email" placeholder="usuario@example.com" required />
+        <div class="title2">Ingrese su contraseña:</div>
+        <input type="password" id="password" placeholder="contraseña" required />
+        <div class="button_log">
+            <button onclick="login()">Ingresar</button>
+        </div>
+    </section>
+
+    <script>
+        function login() {
+            // Obtenemos los valores de email y contraseña
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+
+            // Definimos las credenciales válidas
+            const credencialesValidas = [
+                { email: "usuario1@example.com", password: "123" }
+                // Puedes agregar más credenciales válidas aquí si lo deseas
+            ];
+
+            // Verificamos si las credenciales ingresadas coinciden con alguna de las credenciales válidas
+            const credencialValida = credencialesValidas.find(credencial => credencial.email === email && credencial.password === password);
+
+            if (credencialValida) {
+                alert("Inicio de sesión exitoso!");
+                // Redirigimos al usuario a la página de inicio (home.html)
+                window.location.href = "home (1).html";
+            } else {
+                alert("Usuario o contraseña incorrectos. Por favor, inténtelo de nuevo.");
+            }
+        }
+    </script>
+</body>
+
+</html>
