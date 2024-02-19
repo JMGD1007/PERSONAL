@@ -79,7 +79,7 @@ h2{
 }
 
 .portada{
-    height: 50%;
+    height: 70%;
     background-color: blueviolet;
     display: flex;
     justify-content: center;
@@ -99,7 +99,7 @@ h2{
 
 .info p{
     margin-bottom: -0.9%;
-    font-size: 19px;
+    font-size: 15px;
 }
 
 .botones_reproduccion{
@@ -119,4 +119,6 @@ h2{
 #mute-btn{
     cursor: pointer;
 }
+
+
 /* END: REPRODUCCION */
