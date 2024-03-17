@@ -3,18 +3,16 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ListaAutosComponent } from './Lista-Autos/Lista-Autos.component';
-import { PaginasComponent } from './paginas/paginas.component';
 import { ServiciosComponent } from './servicios/servicios.component';
 import { ComponentesComponent } from './componentes/componentes.component';
+import { PagListVehiculosComponent } from './paginas/PagListVehiculos/PagListVehiculos.component';
 
 @NgModule({
-  declarations: [				
+  declarations: [
     AppComponent,
-      ListaAutosComponent,
-      PaginasComponent,
-      ServiciosComponent,
-      ComponentesComponent
+    ComponentesComponent,
+    ServiciosComponent,
+    PagListVehiculosComponent
    ],
   imports: [
     BrowserModule,
