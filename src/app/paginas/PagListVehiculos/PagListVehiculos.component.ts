@@ -12,4 +12,9 @@ export class PagListVehiculosComponent implements OnInit {
   ngOnInit() {
   }
 
+  public listavehiculos: Array<any> = [
+    {"codigo": "A001", "marca": "CHEVROLET", "modelo":"ONIX", "color": "AZUL", "foto":null, "anio":"2024", "calificacion":3},
+
+  ]
+
 }
