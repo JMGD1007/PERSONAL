@@ -2,10 +2,12 @@ import { NgModule } from "@angular/core";
 
 import { PagListVehiculosComponent } from "./PagListVehiculos/PagListVehiculos.component";
 import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
     imports:[
-        CommonModule
+        CommonModule,
+        FormsModule,
     ],
     declarations:[
         PagListVehiculosComponent,

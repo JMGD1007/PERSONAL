@@ -4,46 +4,51 @@
   <div class="card-header">
     LISTA DE VEHICULOS
   </div>
+
   <div class="card-body">
     <div class="row">
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Filtro:</label>
-        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Marca">
+        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Marca" [(ngModel)]="filtro">
+        
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12">
-      <table class="table table-dark">
-        <thead>
-          <tr>
-            <th>
-              <button class="btn btn-success btn-xs" 
-              [ngClass]="{'btn-success': mostrarImagen, 'btn-warning':!mostrarImagen}"
-              (click)="mostrar()" [innerText]="mostrarImagen ? 'Mostrar Imagen': 'Ocultar Imagen' "></button>
-            </th>
-            <th>MARCA</th>
-            <th>MODELO</th>
-            <th>AÑO</th>
-            <th>COLOR</th>
-            <th>KILOMETRAJE</th>
-            <th>PRECIO</th>
-            <th>CALIFICACION</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of listavehiculos">
-            <td><img [src]="item.foto" style="width: 200px;" *ngIf="this.mostrarImagen"></td>
-            <td>{{item.marca}}</td>
-            <td>{{item.modelo}}</td>
-            <td [innerText]="item.anio">2023</td>
-            <td>{{item.color}}</td>
-            <td>{{item.kilometraje}}</td>
-            <td>{{item.precio | currency}}</td>
-            <td>{{item.calificacion}}</td>
-          </tr>    
-        </tbody>
-      </table>
+    <div class="col-12">
+        FILTRADO POR: {{filtro}}
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <table class="table table-dark">
+          <thead>
+            <tr>
+              <th>
+                <button class="btn btn-success btn-xs" 
+                [ngClass]="{'btn-success': mostrarImagen, 'btn-warning':!mostrarImagen}"
+                (click)="mostrar()" [innerText]="mostrarImagen ? 'Mostrar Imagen': 'Ocultar Imagen' "></button>
+              </th>
+              <th>MARCA</th>
+              <th>MODELO</th>
+              <th>AÑO</th>
+              <th>COLOR</th>
+              <th>KILOMETRAJE</th>
+              <th>PRECIO</th>
+              <th>CALIFICACION</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of listavehiculos">
+              <td><img [src]="item.foto" style="width: 200px;" *ngIf="this.mostrarImagen"></td>
+              <td>{{item.marca}}</td>
+              <td>{{item.modelo}}</td>
+              <td [innerText]="item.anio">2023</td>
+              <td>{{item.color}}</td>
+              <td>{{item.kilometraje}}</td>
+              <td>{{item.precio | currency}}</td>
+              <td>{{item.calificacion}}</td>
+            </tr>    
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 
