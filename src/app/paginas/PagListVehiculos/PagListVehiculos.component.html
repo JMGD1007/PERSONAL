@@ -18,7 +18,9 @@
         <thead>
           <tr>
             <th>
-              <button class="btn btn-success btn-xs">Mostrar Imagen</button>
+              <button class="btn btn-success btn-xs" 
+              [ngClass]="{'btn-success': mostrarImagen, 'btn-warning':!mostrarImagen}"
+              (click)="mostrar()" [innerText]="mostrarImagen ? 'Mostrar Imagen': 'Ocultar Imagen' "></button>
             </th>
             <th>MARCA</th>
             <th>MODELO</th>
@@ -30,46 +32,16 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td></td>
-            <td>CHEVROLET</td>
-            <td>SAIL</td>
-            <td>2023</td>
-            <td>AZUL</td>
-            <td>50000</td>
-            <td>17000</td>
-            <td>3</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td>CHEVROLET</td>
-            <td>SAIL</td>
-            <td>2023</td>
-            <td>AZUL</td>
-            <td>50000</td>
-            <td>17000</td>
-            <td>3</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td>CHEVROLET</td>
-            <td>SAIL</td>
-            <td>2023</td>
-            <td>AZUL</td>
-            <td>50000</td>
-            <td>17000</td>
-            <td>3</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td>CHEVROLET</td>
-            <td>SAIL</td>
-            <td>2023</td>
-            <td>AZUL</td>
-            <td>50000</td>
-            <td>17000</td>
-            <td>3</td>
-          </tr>
+          <tr *ngFor="let item of listavehiculos">
+            <td><img [src]="item.foto" style="width: 200px;" *ngIf="this.mostrarImagen"></td>
+            <td>{{item.marca}}</td>
+            <td>{{item.modelo}}</td>
+            <td [innerText]="item.anio">2023</td>
+            <td>{{item.color}}</td>
+            <td>{{item.kilometraje}}</td>
+            <td>{{item.precio | currency}}</td>
+            <td>{{item.calificacion}}</td>
+          </tr>    
         </tbody>
       </table>
     </div>
