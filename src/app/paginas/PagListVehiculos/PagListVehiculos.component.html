@@ -39,12 +39,14 @@
             <tr *ngFor="let item of listavehiculos">
               <td><img [src]="item.foto" style="width: 200px;" *ngIf="this.mostrarImagen"></td>
               <td>{{item.marca}}</td>
-              <td>{{item.modelo | lowercase }}</td>
+              <td>{{item.modelo | lowercase | aEspacio:'-' }}</td>
               <td [innerText]="item.anio">2023</td>
               <td>{{item.color}}</td>
               <td>{{item.kilometraje}}</td>
               <td>{{item.precio | currency}}</td>
-              <td>{{item.calificacion}}</td>
+              <td>
+                <app-calificacion [calificacion]="item.calificacion"></app-calificacion>
+              </td>
             </tr>    
           </tbody>
         </table>
