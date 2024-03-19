@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { VehiculoService } from '../../servicios/Vehiculo.service';
 
 @Component({
   selector: 'app-PagListVehiculos',
