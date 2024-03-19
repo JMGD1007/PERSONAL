@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-calificacion',
@@ -8,11 +8,21 @@ import { Component, Input, OnInit } from '@angular/core';
 export class CalificacionComponent implements OnInit {
 
   @Input () calificacion:number = 0;
+  
+  @Output() accion = new EventEmitter <any>();
+  
+  lista:Array <any> = [];
 
   constructor() { }
 
   ngOnInit() {
-    console.log('Calificacion: ', this.calificacion)
+    for(let i=0; i<this.calificacion; i++){
+      this.lista.push(1);
+    }
+  }
+
+  select (){
+    this.accion.emit(this.calificacion)
   }
 
 }

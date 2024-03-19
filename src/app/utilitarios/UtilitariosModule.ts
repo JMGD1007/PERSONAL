@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { AEspacioPipe } from "./pipes/AEspacio.pipe";
 import { CalificacionComponent } from "./componentes/calificacion/calificacion.component";
+import { CommonModule } from "@angular/common";
 
 
 @NgModule({
@@ -8,7 +9,9 @@ import { CalificacionComponent } from "./componentes/calificacion/calificacion.c
         AEspacioPipe,
         CalificacionComponent,
     ],
-    imports: [],
+    imports: [
+        CommonModule,
+    ],
     exports: [
         AEspacioPipe,
         CalificacionComponent,

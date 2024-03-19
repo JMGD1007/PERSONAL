@@ -45,7 +45,7 @@
               <td>{{item.kilometraje}}</td>
               <td>{{item.precio | currency}}</td>
               <td>
-                <app-calificacion [calificacion]="item.calificacion"></app-calificacion>
+                <app-calificacion [calificacion]="item.calificacion" (accion)="recepcion($event)"></app-calificacion>
               </td>
             </tr>    
           </tbody>
