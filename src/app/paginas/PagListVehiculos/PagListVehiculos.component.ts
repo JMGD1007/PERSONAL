@@ -22,6 +22,7 @@ export class PagListVehiculosComponent implements OnInit {
 
   ngOnInit() {
     this.listaVehiculos = this.vehiculoService.getVehiculos();
+    this.vehiculoService.addVehiculo({"codigo": "A005", "marca": "HYUNDAI", "modelo":"ACCENT", "color": "AZUL", "kilometraje": "50000", "precio":17000, "foto":"https://th.bing.com/th/id/R.64086b95ab1443ffe710e3e5da210db4?rik=RiDTJckVAE1hLQ&pid=ImgRaw&r=0", "anio":2024, "calificacion":5})
   }
 
   mostrar(){

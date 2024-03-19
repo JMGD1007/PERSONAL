@@ -12,6 +12,10 @@ getVehiculos(){
   return this.listavehiculos;
 }
 
+addVehiculo(vehiculo: vehiculo){
+  this.listavehiculos.push(vehiculo);
+}
+
 private listavehiculos: Array<vehiculo> = [
   {"codigo": "A001", "marca": "CHEVROLET", "modelo":"ONIX-6", "color": "AZUL", "kilometraje": "50000", "precio":17000, "foto":"https://th.bing.com/th/id/OIP.EmPaXsyNiOvaTmXbapEgLAHaDy?rs=1&pid=ImgDetMain", "anio":2024, "calificacion":3},
   {"codigo": "A002", "marca": "KIA", "modelo":"RIO", "color": "AZUL", "kilometraje": "50000", "precio":17000, "foto":"https://www.grupomax.mx/wp-content/uploads/2021/10/rio-sd-22-azul3.png", "anio":2024, "calificacion":4},
