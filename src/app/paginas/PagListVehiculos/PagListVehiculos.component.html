@@ -50,7 +50,6 @@
               <td>{{item.precio | currency}}</td>
               <td>
                 <app-calificacion [calificacion]="item.calificacion" (accion)="recepcion($event)"></app-calificacion>
-                {{item.calificacion}}
               </td>
             </tr>    
           </tbody>
