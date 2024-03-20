@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { vehiculo } from '../../utilitarios/modelos/Vehiculo'; 
+import { ActivatedRoute } from '@angular/router';
+import { VehiculoService } from '../../servicios/Vehiculo.service';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-PagVehiculos',
@@ -8,15 +11,18 @@ import { vehiculo } from '../../utilitarios/modelos/Vehiculo';
 })
 export class PagVehiculosComponent implements OnInit {
 
-  vehiculo: vehiculo = {
-    codigo: "001",
-    marca: "CHEVROLET",
-    modelo: "ONIX",
-  }
+  vehiculo?: vehiculo 
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private vehiculoService: VehiculoService,
+  ) { }
 
   ngOnInit() {
+    this.route.params.subscribe(params =>{
+      this.vehiculo = params['vehiculos/:codigo']
+    })
+
   }
 
 }

@@ -12,6 +12,11 @@ getVehiculos(){
   return this.listavehiculos;
 }
 
+getVehiculo(codigo:string): vehiculo | undefined{
+  let vehiculo = this.listavehiculos.find(ele => ele.codigo === codigo);
+  return vehiculo;
+}
+
 addVehiculo(vehiculo: vehiculo){
   this.listavehiculos.push(vehiculo);
 }
