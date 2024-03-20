@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { vehiculo } from '../utilitarios/modelos/Vehiculo';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,11 @@ export class VehiculoService {
 
 constructor() { }
 
-getVehiculos(){
+getVehiculos(filtro:any){
+  const escucha: Observable<Array<vehiculo>> = new Observable(escuchando => { 
+    let lista = this.listavehiculos.filter(elem => elem.marca === filtro);
+    escuchando.next(lista);
+  })
   return this.listavehiculos;
 }
 
