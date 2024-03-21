@@ -8,7 +8,16 @@ import { VehiculoService } from '../../servicios/Vehiculo.service';
 })
 export class PagListVehiculosComponent implements OnInit {
   mostrarImagen = true;
-  filtro: string= ""; 
+  private _filtro: string = '';
+
+  get filtro (){
+    return this._filtro
+  }
+
+  set filtro(data:string){
+    this._filtro = data;
+    this.consultaVehiculos;
+  }
 
   @Input() valor:string = '';
   listaVehiculos: Array <any> = [];
@@ -29,9 +38,9 @@ export class PagListVehiculosComponent implements OnInit {
   }
 
   consultaVehiculos(){
-    this.listaVehiculos = this.vehiculoService.getVehiculos(this.filtro).subscribe(data => {
+    this.vehiculoService.getVehiculos(this.filtro).subscribe(data =>{ 
       this.listaVehiculos = data;
-    });
+    })
   }
 
   recepcion(dato:number){
