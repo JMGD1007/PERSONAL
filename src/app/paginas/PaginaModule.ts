@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 
 import { PagListVehiculosComponent } from "./PagListVehiculos/PagListVehiculos.component";
 import { CommonModule } from "@angular/common";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { UtilitariosModule } from "../utilitarios/UtilitariosModule";
 import { PagVehiculosComponent } from "./PagVehiculos/PagVehiculos.component";
 import { RouterModule } from "@angular/router";
@@ -14,6 +14,7 @@ import { PagVehiculoRegistroComponent } from "./PagVehiculoRegistro/PagVehiculoR
         FormsModule,
         UtilitariosModule,
         RouterModule,
+        ReactiveFormsModule,
     ],
     declarations:[
         PagListVehiculosComponent,

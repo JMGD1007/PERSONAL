@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { vehiculo } from '../../utilitarios/modelos/Vehiculo';
 import { VehiculoService } from '../../servicios/Vehiculo.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-PagVehiculoRegistro',
@@ -9,30 +10,33 @@ import { VehiculoService } from '../../servicios/Vehiculo.service';
 })
 export class PagVehiculoRegistroComponent implements OnInit {
 
-  vehiculo: vehiculo
+  vehiculo?: vehiculo
+  formulario:FormGroup;
+
   
   constructor(
-    private vehiculoServicio: VehiculoService
+    private vehiculoServicio: VehiculoService,
+    private formBuilder: FormBuilder,
   ) {
-    this.vehiculo = {
-      codigo: '',
-      marca: '',
-      color: '',
-      modelo: '',
-      kilometraje: '',
-      precio: 0,
-      foto: null,
-      anio: 0,
-      calificacion: 0
-    }
+    this.formulario = this.formBuilder.group({
+      "codigo": [],
+      "marca": [],
+      "modelo": [],
+      "anio": [],
+      "color": [],
+      "kilometraje":[],
+      "precio": [],
+      "calificacion":[],
+    });
   }
 
   ngOnInit() {
   }
 
   guardar(){
-    this.vehiculoServicio.addVehiculo(this.vehiculo)
-    console.log("Grabado con éxito")
+    let vehiculo:vehiculo = (this.formulario.value);
+    this.vehiculoServicio.addVehiculo(vehiculo);
+    console.log("Formulario", this.formulario.value);
   }
 
 }
