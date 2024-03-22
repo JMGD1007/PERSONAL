@@ -20,7 +20,9 @@ export class PagVehiculosComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params =>{
-      this.vehiculo = params['vehiculos/:codigo']
+      this.vehiculo = params['vehiculos/:codigo'].subscribe((data: vehiculo | undefined) =>{
+        this.vehiculo=data
+      })
     })
 
   }
