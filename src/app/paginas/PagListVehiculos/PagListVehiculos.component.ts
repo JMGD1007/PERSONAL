@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { VehiculoService } from '../../servicios/Vehiculo.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { vehiculo } from '../../utilitarios/modelos/Vehiculo';
 
 @Component({
   selector: 'app-PagListVehiculos',
@@ -8,20 +9,18 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./PagListVehiculos.component.css']
 })
 export class PagListVehiculosComponent implements OnInit {
-  mostrarImagen = true;
+  public mostrarImagen = true;
+  public listaVehiculos: Array<vehiculo> = []
   private _filtro: string = '';
 
   get filtro (){
     return this._filtro
   }
 
-  set filtro(data:string){
-    this._filtro = data;
+  set filtro(_data:string){
+    //this._filtro = this.filtro;
     this.consultaVehiculos;
   }
-
-  @Input() valor:string = '';
-  listaVehiculos: Array <any> = [];
 
   constructor(
     private vehiculoService: VehiculoService,
@@ -30,7 +29,10 @@ export class PagListVehiculosComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.consultaVehiculos();
+    this.vehiculoService.getVehiculos().subscribe(respuesta => {
+      console.log(respuesta);
+      this.listaVehiculos = respuesta;
+    });
   }
 
   mostrar(){
@@ -38,7 +40,7 @@ export class PagListVehiculosComponent implements OnInit {
   }
 
   consultaVehiculos(){
-    this.vehiculoService.getVehiculos(this.filtro).subscribe(data =>{ 
+    this.vehiculoService.getVehiculos(/*this.filtro*/).subscribe(data =>{ 
       this.listaVehiculos = data;
     })
   }

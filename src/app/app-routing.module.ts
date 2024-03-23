@@ -22,6 +22,7 @@ const routes: Routes = [
   {
     path: "vehiculos/:codigo",
     component: PagVehiculosComponent
+    //component: VehiculoDetalleComponent
   },
   {
     path: "",

@@ -1,26 +1,39 @@
 import { Injectable } from '@angular/core';
 import { vehiculo } from '../utilitarios/modelos/Vehiculo';
 import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VehiculoService {
 
-constructor() { }
+constructor(
+  private http: HttpClient,
+) { }
+baseUrl = "https://epico.gob.ec/vehiculo/public/api/";
 
-getVehiculos(filtro:any):Observable<Array<vehiculo>>{
+getVehiculos():Observable<vehiculo[]>{
+  return this.http.get<Respuesta>(this.baseUrl+"vehiculos/").pipe(
+    map (respuesta => {
+      return respuesta.data;
+    })
+    );
+}
+
+/*getVehiculos(filtro:any):Observable<Array<vehiculo>>{
   const escucha: Observable<Array<vehiculo>> = new Observable(escuchando => { 
     let lista = this.listavehiculos.filter(elem => elem.marca.toLowerCase().includes (filtro));
     escuchando.next(lista);
   })
   return escucha;
-}
+}*/
 
-getVehiculo(codigo:string): vehiculo | undefined{
+/*getVehiculo(codigo:string): vehiculo | undefined{
   let vehiculo = this.listavehiculos.find(ele => ele.codigo === codigo);
   return vehiculo;
-}
+}*/
 
 addVehiculo(vehiculo: vehiculo){
   this.listavehiculos.push(vehiculo);
@@ -35,4 +48,12 @@ private listavehiculos: Array<vehiculo> = [
 
 ]
 
+}
+
+export interface Respuesta{
+  codigo: string;
+  marca: string;
+  modelo: string;
+  mensaje: string;
+  data: any;
 }
