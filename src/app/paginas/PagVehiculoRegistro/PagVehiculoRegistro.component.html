@@ -12,7 +12,8 @@
           <label for="staticCodigo" class="col-sm-2 col-form-label">Codigo:</label>
           <div class="col-sm-10">
             <input type="text" class="form-control" id="staticCodigo" name="codigo" formControlName="codigo">
-            <span class="text-danger" *ngIf="formulario.controls['codigo'].errors">Valor Requerido</span>
+            <span class="text-danger" *ngIf="formulario.controls['codigo'].errors?.['required']">Valor Requerido</span><br>
+            <span class="text-danger" *ngIf="formulario.controls['codigo'].errors?.['codigoValidate']">Solo acepta 1 letra y 3 dígitos</span>            
           </div>
         </div>
 
@@ -20,7 +21,7 @@
           <label for="staticCodigo" class="col-sm-2 col-form-label">Confirmar codigo:</label>
           <div class="col-sm-10">
             <input type="text" class="form-control" id="staticCodigo" name="codigo" formControlName="codigo_confirm">
-            <span class="text-danger" *ngIf="formulario.errors">No son iguales</span>
+            <span class="text-danger" *ngIf="formulario.errors?.['codigo_comparativo']">No son iguales</span>
           </div>
         </div>
 

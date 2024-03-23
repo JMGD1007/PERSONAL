@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 })
 export class PagVehiculoRegistroComponent implements OnInit {
 
-  vehiculo?: vehiculo
+  vehiculo?: vehiculo;
   formulario:FormGroup;
 
   
@@ -21,6 +21,7 @@ export class PagVehiculoRegistroComponent implements OnInit {
   ) {
     this.formulario = this.formBuilder.group({
       "codigo": ['', [Validators.required, validadorCodigo()]],
+      "codigo_confirm": [],
       "marca": [],
       "modelo": [],
       "anio": [],
@@ -28,6 +29,8 @@ export class PagVehiculoRegistroComponent implements OnInit {
       "kilometraje":[],
       "precio": [],
       "calificacion":[],
+    },{
+      validators: [validarCodigoComparativo()]
     });
   }
 
@@ -57,11 +60,22 @@ export class PagVehiculoRegistroComponent implements OnInit {
 
 export function validadorCodigo(): ValidatorFn{
   return (control: AbstractControl): ValidationErrors|null =>{
-    const codigoV = /^\d{4}$/;
+    const codigoV = /[A-Z]\d{3}$/;
     let value = control.value;
     if(codigoV.test(value)){
       return null;
     }
     return {'codigoValidate': true}
+  }
+}
+
+export function validarCodigoComparativo(){
+  return (formulario: FormGroup): ValidationErrors|null => {
+    let valor = formulario.controls["codigo"].value;
+    let valor2 = formulario.controls["codigo_confirm"].value;
+    if(valor === valor2){
+      return null;
+    }
+    return {"codigo_comparativo":true}
   }
 }
