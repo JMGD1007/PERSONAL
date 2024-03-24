@@ -52,6 +52,10 @@ actualizarVehiculo(vehiculo:vehiculo, codigo:string){
   return this.http.put<Respuesta>(this.baseUrl+"vehiculo/"+codigo,vehiculo, this.httpOptions)
 }
 
+eliminarVehiculo(codigo:string){
+  return this.http.delete<Respuesta>(this.baseUrl+"vehiculo/"+codigo);
+}
+
 addVehiculo(vehiculo: vehiculo){
   this.listavehiculos.push(vehiculo);
 }

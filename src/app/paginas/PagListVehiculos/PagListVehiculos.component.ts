@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { VehiculoService } from '../../servicios/Vehiculo.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { vehiculo } from '../../utilitarios/modelos/Vehiculo';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-PagListVehiculos',
@@ -29,10 +30,7 @@ export class PagListVehiculosComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.vehiculoService.getVehiculos().subscribe(respuesta => {
-      console.log(respuesta);
-      this.listaVehiculos = respuesta;
-    });
+    this.consultaVehiculos();
   }
 
   mostrar(){
@@ -40,13 +38,39 @@ export class PagListVehiculosComponent implements OnInit {
   }
 
   consultaVehiculos(){
-    this.vehiculoService.getVehiculos(/*this.filtro*/).subscribe(data =>{ 
-      this.listaVehiculos = data;
-    })
+    this.vehiculoService.getVehiculos().subscribe(respuesta => {
+      console.log(respuesta);
+      this.listaVehiculos = respuesta;
+    });
   }
 
   recepcion(dato:number){
     console.log('Dato:',dato)
   }
+
+  eliminar(codigo:string){
+    Swal.fire({
+      title: "Estás seguro que deseas eliminar este registro?",
+      showCancelButton: true,
+      confirmButtonText: "Sí",
+      cancelButtonText: `No`,
+      icon: "question", 
+    }).then((res)=>{
+      if(res.isConfirmed){
+        this.vehiculoService.eliminarVehiculo(codigo).subscribe(data => {
+          if(data.codigo == '1')
+          this.consultaVehiculos();
+          Swal.fire({
+            title: "Mensaje",
+            text: "Vehiculo eliminado con éxito",
+            icon: "success"
+          })
+            
+        });
+      }
+
+    })
+  }
+
 
 }

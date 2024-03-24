@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { VehiculoService } from '../../servicios/Vehiculo.service';
+import { VehiculoService} from '../../servicios/Vehiculo.service';
 import { vehiculo } from '../../utilitarios/modelos/Vehiculo';
 import Swal from 'sweetalert2';
 
@@ -17,10 +17,9 @@ export class VehiculoDetalleComponent implements OnInit {
   vehiculo?: vehiculo;
   formulario: FormGroup;
 
-  constructor(
+  constructor(private activedRoute: ActivatedRoute,
     private vehiculoService: VehiculoService,
     private formBuilder: FormBuilder,
-    private activedRoute: ActivatedRoute,
   ) {
     this.formulario = this.formBuilder.group({
       "codigo": [],
@@ -63,7 +62,6 @@ export class VehiculoDetalleComponent implements OnInit {
 
   guardar(){
     if(this.formulario.valid){
-      let codigo = this.vehiculo?.codigo;
       this.vehiculoService.actualizarVehiculo({...this.formulario.value}, this.formulario.controls['codigo'].value).subscribe(data =>{
         if(data.codigo == '1'){
           Swal.fire({
