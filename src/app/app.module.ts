@@ -4,7 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PaginaModule } from './paginas/PaginaModule';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { UserInterceptorService } from './interceptores/UserInterceptor.service';
 
 
 @NgModule({
@@ -17,7 +18,9 @@ import { HttpClientModule } from '@angular/common/http';
     PaginaModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: UserInterceptorService, multi:true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
