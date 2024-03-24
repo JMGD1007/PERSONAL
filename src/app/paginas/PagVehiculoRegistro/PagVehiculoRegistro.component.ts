@@ -35,7 +35,7 @@ export class PagVehiculoRegistroComponent implements OnInit {
 
   ngOnInit() {
     this.activedRoute.params.subscribe(param =>{
-      let codgio = param ['vehiculos/:codigo'];
+      let codigo = param ['vehiculos/:codigo'];
       this.vehiculoService.getVehiculo
     });
   }

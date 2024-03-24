@@ -1,28 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { VehiculoService } from '../../servicios/Vehiculo.service';
 import { vehiculo } from '../../utilitarios/modelos/Vehiculo';
-import { validadorCodigo} from '../PagVehiculoRegistro/PagVehiculoRegistro.component';
 import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-VehiculoDetalle',
   templateUrl: './VehiculoDetalle.component.html',
   styleUrls: ['./VehiculoDetalle.component.css']
 })
+
 export class VehiculoDetalleComponent implements OnInit {
 
   vehiculo?: vehiculo;
   formulario: FormGroup;
 
   constructor(
-    private activedRoute: ActivatedRoute,
     private vehiculoService: VehiculoService,
     private formBuilder: FormBuilder,
+    private activedRoute: ActivatedRoute,
   ) {
     this.formulario = this.formBuilder.group({
-      "codigo": ['', [Validators.required, validadorCodigo()]],
+      "codigo": [],
       "marca": ['', [Validators.required]],
       "modelo": ['', [Validators.required]],
       "anio": ['', [Validators.required]],
@@ -59,17 +60,6 @@ export class VehiculoDetalleComponent implements OnInit {
     });
   }
   
-  imprimir(){
-    console.log('Formulario: ', this.formulario);
-    let password = this.formulario.get('password');
-    let nuevosValidadores = [Validators.required, Validators.email];
-    if(password){
-      password.setValidators(nuevosValidadores);
-      password.updateValueAndValidity();
-    }
-    if (this.formulario.valid){}
-
-  }
 
   guardar(){
     if(this.formulario.valid){
