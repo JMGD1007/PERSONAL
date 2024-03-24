@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { vehiculo } from '../../utilitarios/modelos/Vehiculo';
 import { VehiculoService } from '../../servicios/Vehiculo.service';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { validadorCodigo } from '../../validaciones/VehiculoValidaciones';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-PagVehiculoRegistro',
@@ -16,57 +18,53 @@ export class PagVehiculoRegistroComponent implements OnInit {
 
   
   constructor(
-    private vehiculoServicio: VehiculoService,
+    private vehiculoService: VehiculoService,
     private formBuilder: FormBuilder,
+    private activedRoute: ActivatedRoute,
   ) {
     this.formulario = this.formBuilder.group({
       "codigo": ['', [Validators.required, validadorCodigo()]],
-      "codigo_confirm": [],
-      "marca": [],
-      "modelo": [],
-      "anio": [],
-      "color": [],
-      "kilometraje":[],
+      "marca": ['', [Validators.required]],
+      "modelo": ['', [Validators.required]],
+      "anio": ['', [Validators.required]],
+      "kilometraje":['', [Validators.required]],
       "precio": [],
-      "calificacion":[],
-    },{
-      validators: [validarCodigoComparativo()]
+      "calificacion":['', [Validators.required]],
     });
   }
 
   ngOnInit() {
+    this.activedRoute.params.subscribe(param =>{
+      let codgio = param ['vehiculos/:codigo'];
+      this.vehiculoService.getVehiculo
+    });
   }
 
   guardar(){
-    let vehiculo:vehiculo = (this.formulario.value);
-    this.vehiculoServicio.addVehiculo(vehiculo);
-    if (this.formulario.valid){
+    if(this.formulario.valid){
+      this.vehiculoService.insertVehiculo({...this.formulario.value}).subscribe(
+        respuesta => {
+          if (respuesta.codigo == '1'){
+            Swal.fire({
+              title: "Mensaje",
+              text: "Vehículo registrado con éxito!",
+              icon: "success"
+            }). then(res =>{
+              this.formulario.reset();
+            });
+          }
+        }
+      )
+      }else{
       Swal.fire({
         title: "Mensaje",
-        text: "Se grabó con éxito!",
-        icon: "info"
+        text: "No se pudo registrar el vehículo",
+        icon: "error"
       })
-    }else{
-      Swal.fire({
-        title: "Mensaje",
-        text: "Te faltan campos",
-        icon: "info"
-      })
-    };
-
-  }
-
-}
-
-export function validadorCodigo(): ValidatorFn{
-  return (control: AbstractControl): ValidationErrors|null =>{
-    const codigoV = /[A-Z]\d{3}$/;
-    let value = control.value;
-    if(codigoV.test(value)){
-      return null;
     }
-    return {'codigoValidate': true}
-  }
+   
+  };
+
 }
 
 export function validarCodigoComparativo(){
@@ -79,3 +77,5 @@ export function validarCodigoComparativo(){
     return {"codigo_comparativo":true}
   }
 }
+export { validadorCodigo };
+
