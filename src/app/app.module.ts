@@ -22,9 +22,9 @@ import { ClientesComponent } from './servicios/clientes/clientes.component';
     HttpClientModule,
     FormsModule,
   ],
-  providers: [
+  /*providers: [
     {provide: HTTP_INTERCEPTORS, useClass: UserInterceptorService, multi:true}
-  ],
+  ],*/
   bootstrap: [AppComponent]
 })
 export class AppModule { }
