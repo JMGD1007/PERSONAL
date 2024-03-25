@@ -3,9 +3,9 @@ export interface vehiculo {
     marca: string;
     color?: string;
     modelo: string;
-    kilometraje?: string;
-    precio?: number;
+    kilometraje: string;
+    precio: number;
     foto?: string | null;
-    anio?: number;
-    calificacion?: number;
+    anio: number;
+    calificacion: number;
 }

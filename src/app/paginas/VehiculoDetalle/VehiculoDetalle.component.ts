@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { VehiculoService} from '../../servicios/Vehiculo.service';
 import { vehiculo } from '../../utilitarios/modelos/Vehiculo';
 import Swal from 'sweetalert2';
+import { FormsModule } from '@angular/forms';
 import { validadorCodigo } from '../PagVehiculoRegistro/PagVehiculoRegistro.component';
 
 
@@ -15,14 +16,20 @@ import { validadorCodigo } from '../PagVehiculoRegistro/PagVehiculoRegistro.comp
 
 export class VehiculoDetalleComponent implements OnInit {
 
-  vehiculo?: vehiculo;
-  formulario: FormData = new FormData();
-  formData: any;
+  vehiculo?: vehiculo; 
+  codigo: string = ''; 
+  marca: string = ''; 
+  modelo: string = '';
+  anio: number = 0;
+  kilometraje: string = '';
+  precio: number = 0;
+  calificacion: number = 0;
+
 
   constructor(
     private vehiculoService: VehiculoService,
     private activedRoute: ActivatedRoute,
-  ) { }
+  ) {  }
 
   ngOnInit() {
     this.activedRoute.params.subscribe(params => {
@@ -30,22 +37,20 @@ export class VehiculoDetalleComponent implements OnInit {
         if (data.codigo == '1') {
           this.vehiculo = data.data;
           if (this.vehiculo) {
-            this.formData.append('codigo', this.vehiculo.codigo);
-            this.formData.append('marca', this.vehiculo.marca);
-            this.formData.append('modelo', this.vehiculo.modelo);
-            this.formData.append('anio', this.vehiculo.anio);
-            this.formData.append('kilometraje', this.vehiculo.kilometraje);
-            this.formData.append('precio', this.vehiculo.precio);
-            this.formData.append('calificacion', this.vehiculo.calificacion);
+            this.codigo = this.vehiculo.codigo;
+            this.marca = this.vehiculo.marca;
+            this.modelo = this.vehiculo.modelo;
+            this.anio = this.vehiculo.anio;
+            this.kilometraje = this.vehiculo.kilometraje;
+            this.precio = this.vehiculo.precio;
+            this.calificacion = this.vehiculo.calificacion;
           }
-        }else{
+        } else{
           Swal.fire({
             title: "Mensaje de Alerta",
             text: "No se pudo cargar la informacion",
             icon: "error"
-          }). then(res =>{
-            this.formData = new FormData();
-          });
+          })
         }
 
       })
@@ -54,8 +59,18 @@ export class VehiculoDetalleComponent implements OnInit {
   
 
   guardar() {
-    if (this.formData && this.formData.get('codigo')) {
-      this.vehiculoService.actualizarVehiculo(this.formData, this.formData.get('codigo').toString()).subscribe(data => {
+    if (this.vehiculo && this.codigo) {
+      const datosVehiculo = {
+        codigo: this.codigo,
+        marca: this.marca,
+        modelo: this.modelo,
+        anio: this.anio,
+        kilometraje: this.kilometraje,
+        precio: this.precio,
+        calificacion: this.calificacion
+      };
+  
+      this.vehiculoService.actualizarVehiculo(this.vehiculo, this.codigo).subscribe(data => {
         if (data.codigo == '1') {
           Swal.fire({
             title: "Mensaje",
@@ -74,15 +89,3 @@ export class VehiculoDetalleComponent implements OnInit {
   }
   
 }
-  
-  export function validarCodigoComparativo(){
-    return (formulario: FormGroup): ValidationErrors|null => {
-      let valor = formulario.controls["codigo"].value;
-      let valor2 = formulario.controls["codigo_confirm"].value;
-      if(valor === valor2){
-        return null;
-      }
-      return {"codigo_comparativo":true}
-    }
-  }
-  export { validadorCodigo };

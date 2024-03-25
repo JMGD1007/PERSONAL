@@ -1,55 +1,55 @@
 <p *ngIf="vehiculo">
-  {{vehiculo?.marca}} 
+  {{vehiculo.marca}} 
 </p>
 
-<form (formdata)="formulario">
+<form>
   <div class="row">
-      <div class="mb-3 row">
+    <div class="mb-3 row">
           <label for="staticCodigo" class="col-sm-2 col-form-label">Codigo:</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="staticCodigo" name="codigo" >           
+            <input type="text" class="form-control" id="staticCodigo" name="codigo" [(ngModel)]="codigo" readonly>           
           </div>
         </div>
 
-        <div class="mb-3 row">
+      <div class="mb-3 row">
           <label for="staticCodigo" class="col-sm-2 col-form-label">Marca:</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="staticCodigo" name="marca" formControlName="marca">
+            <input type="text" class="form-control" id="staticCodigo" name="marca" [(ngModel)]="marca">
           </div>
         </div>
 
         <div class="mb-3 row">
           <label for="staticCodigo" class="col-sm-2 col-form-label">Modelo:</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="staticCodigo" name="modelo" formControlName="modelo">
+            <input type="text" class="form-control" id="staticCodigo" name="modelo" [(ngModel)]="modelo">
           </div>
         </div>
 
         <div class="mb-3 row">
           <label for="staticCodigo" class="col-sm-2 col-form-label">Año:</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="staticCodigo" name="anio" formControlName="anio" >
+            <input type="text" class="form-control" id="staticCodigo" name="anio" [(ngModel)]="anio" >
           </div>
         </div>
 
         <div class="mb-3 row">
           <label for="staticCodigo" class="col-sm-2 col-form-label">Kilometraje:</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="staticCodigo" name="kilometraje" formControlName="kilometraje">
+            <input type="text" class="form-control" id="staticCodigo" name="kilometraje" [(ngModel)]="kilometraje">
           </div>
         </div>
 
         <div class="mb-3 row">
           <label for="staticCodigo" class="col-sm-2 col-form-label">Precio:</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="staticCodigo" name="precio" formControlName="precio">
+            <input type="text" class="form-control" id="staticCodigo" name="precio" [(ngModel)]="precio">
           </div>
         </div>
 
         <div class="mb-3 row">
           <label for="staticCodigo" class="col-sm-2 col-form-label">Calificacion:</label>
           <div class="col-sm-10">
-            <input type="number" class="form-control" id="staticCodigo" name="calificacion" formControlName="calificacion">
+            <input type="number" class="form-control" id="staticCodigo" name="calificacion" [(ngModel)]="calificacion">
           </div>
         </div>
   </div>
