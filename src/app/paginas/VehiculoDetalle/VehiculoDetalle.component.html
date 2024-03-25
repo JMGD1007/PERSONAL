@@ -2,12 +2,12 @@
   {{vehiculo?.marca}} 
 </p>
 
-<form >
+<form (formdata)="formulario">
   <div class="row">
       <div class="mb-3 row">
           <label for="staticCodigo" class="col-sm-2 col-form-label">Codigo:</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="staticCodigo" name="codigo" formControlName="codigo">           
+            <input type="text" class="form-control" id="staticCodigo" name="codigo" >           
           </div>
         </div>
 

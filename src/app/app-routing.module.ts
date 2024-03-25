@@ -6,6 +6,7 @@ import { PagNoFoundComponent } from './paginas/PagNotFound/PagNoFound.component'
 import { PagVehiculosComponent } from './paginas/PagVehiculos/PagVehiculos.component';
 import { PagVehiculoRegistroComponent } from './paginas/PagVehiculoRegistro/PagVehiculoRegistro.component';
 import { VehiculoDetalleComponent } from './paginas/VehiculoDetalle/VehiculoDetalle.component';
+import { ClientesComponent } from './servicios/clientes/clientes.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,10 @@ const routes: Routes = [
   {
     path: "vehiculos",
     component: PagListVehiculosComponent
+  },
+  {
+    path: "clientes",
+    component: ClientesComponent
   },
   {
     path: "vehiculo",

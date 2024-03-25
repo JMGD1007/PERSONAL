@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
+import { Component, NgModule, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { VehiculoService} from '../../servicios/Vehiculo.service';
 import { vehiculo } from '../../utilitarios/modelos/Vehiculo';
 import Swal from 'sweetalert2';
+import { validadorCodigo } from '../PagVehiculoRegistro/PagVehiculoRegistro.component';
 
 
 @Component({
@@ -15,43 +16,35 @@ import Swal from 'sweetalert2';
 export class VehiculoDetalleComponent implements OnInit {
 
   vehiculo?: vehiculo;
-  formulario: FormGroup;
+  formulario: FormData = new FormData();
+  formData: any;
 
-  constructor(private activedRoute: ActivatedRoute,
+  constructor(
     private vehiculoService: VehiculoService,
-    private formBuilder: FormBuilder,
-  ) {
-    this.formulario = this.formBuilder.group({
-      "codigo": [],
-      "marca": ['', [Validators.required]],
-      "modelo": ['', [Validators.required]],
-      "anio": ['', [Validators.required]],
-      "kilometraje":['', [Validators.required]],
-      "precio": [],
-      "calificacion":['', [Validators.required]],
-    });
-    this.formulario.controls['codigo'].disable();
-  }
+    private activedRoute: ActivatedRoute,
+  ) { }
 
   ngOnInit() {
     this.activedRoute.params.subscribe(params => {
       this.vehiculoService.getVehiculo(params['codigo']).subscribe(data => {
-        if(data.codigo == '1'){
-          this.vehiculo = data.data
-          this.formulario.controls['codigo'].setValue(this.vehiculo?.codigo)
-          this.formulario.controls['marca'].setValue(this.vehiculo?.marca)
-          this.formulario.controls['modelo'].setValue(this.vehiculo?.modelo)
-          this.formulario.controls['anio'].setValue(this.vehiculo?.anio)
-          this.formulario.controls['kilometraje'].setValue(this.vehiculo?.kilometraje)
-          this.formulario.controls['precio'].setValue(this.vehiculo?.precio)
-          this.formulario.controls['calificacion'].setValue(this.vehiculo?.calificacion)
+        if (data.codigo == '1') {
+          this.vehiculo = data.data;
+          if (this.vehiculo) {
+            this.formData.append('codigo', this.vehiculo.codigo);
+            this.formData.append('marca', this.vehiculo.marca);
+            this.formData.append('modelo', this.vehiculo.modelo);
+            this.formData.append('anio', this.vehiculo.anio);
+            this.formData.append('kilometraje', this.vehiculo.kilometraje);
+            this.formData.append('precio', this.vehiculo.precio);
+            this.formData.append('calificacion', this.vehiculo.calificacion);
+          }
         }else{
           Swal.fire({
             title: "Mensaje de Alerta",
             text: "No se pudo cargar la informacion",
             icon: "error"
           }). then(res =>{
-            this.formulario.reset();
+            this.formData = new FormData();
           });
         }
 
@@ -60,10 +53,10 @@ export class VehiculoDetalleComponent implements OnInit {
   }
   
 
-  guardar(){
-    if(this.formulario.valid){
-      this.vehiculoService.actualizarVehiculo({...this.formulario.value}, this.formulario.controls['codigo'].value).subscribe(data =>{
-        if(data.codigo == '1'){
+  guardar() {
+    if (this.formData && this.formData.get('codigo')) {
+      this.vehiculoService.actualizarVehiculo(this.formData, this.formData.get('codigo').toString()).subscribe(data => {
+        if (data.codigo == '1') {
           Swal.fire({
             title: "Mensaje",
             text: "Vehículo actualizado con éxito!",
@@ -71,14 +64,25 @@ export class VehiculoDetalleComponent implements OnInit {
           });
         }
       });
-    }else{
+    } else {
       Swal.fire({
         title: "Mensaje",
-        text: "Faltan llenar campos",
+        text: "El código del vehículo no está presente en el formulario",
         icon: "error"
       });
     }
   }
-
-
+  
 }
+  
+  export function validarCodigoComparativo(){
+    return (formulario: FormGroup): ValidationErrors|null => {
+      let valor = formulario.controls["codigo"].value;
+      let valor2 = formulario.controls["codigo_confirm"].value;
+      if(valor === valor2){
+        return null;
+      }
+      return {"codigo_comparativo":true}
+    }
+  }
+  export { validadorCodigo };
