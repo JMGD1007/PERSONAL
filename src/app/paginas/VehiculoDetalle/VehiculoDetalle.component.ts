@@ -1,12 +1,8 @@
 import { Component, NgModule, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { VehiculoService} from '../../servicios/Vehiculo.service';
 import { vehiculo } from '../../utilitarios/modelos/Vehiculo';
 import Swal from 'sweetalert2';
-import { FormsModule } from '@angular/forms';
-import { validadorCodigo } from '../PagVehiculoRegistro/PagVehiculoRegistro.component';
-
 
 @Component({
   selector: 'app-VehiculoDetalle',
@@ -71,21 +67,23 @@ export class VehiculoDetalleComponent implements OnInit {
       };
   
       this.vehiculoService.actualizarVehiculo(this.vehiculo, this.codigo).subscribe(data => {
+        console.log('Respuesta del servicio de actualización:', data);
         if (data.codigo == '1') {
+          this.vehiculo = datosVehiculo;
           Swal.fire({
             title: "Mensaje",
             text: "Vehículo actualizado con éxito!",
             icon: "info"
           });
-        }
-      });
-    } else {
-      Swal.fire({
-        title: "Mensaje",
-        text: "El código del vehículo no está presente en el formulario",
-        icon: "error"
-      });
-    }
+              }
+            });
+          } else {
+            Swal.fire({
+              title: "Mensaje",
+              text: "Falta llenar campos",
+              icon: "error"
+            });
+          }
   }
   
 }
