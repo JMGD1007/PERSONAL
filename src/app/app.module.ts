@@ -6,17 +6,21 @@ import { AppComponent } from './app.component';
 import { PaginaModule } from './paginas/PaginaModule';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { UserInterceptorService } from './interceptores/UserInterceptor.service';
+import { FormsModule } from '@angular/forms';
+import { ClientesComponent } from './servicios/clientes/clientes.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    ClientesComponent,
    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     PaginaModule,
     HttpClientModule,
+    FormsModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: UserInterceptorService, multi:true}
