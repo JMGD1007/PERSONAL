@@ -24,9 +24,9 @@ import { VehiculoDetalleComponent } from './paginas/VehiculoDetalle/VehiculoDeta
     HttpClientModule,
     FormsModule,
   ],
-  /*providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: UserInterceptorService, multi:true}
-  ],*/
+  providers: [
+    //{provide: HTTP_INTERCEPTORS, useClass: UserInterceptorService, multi:true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
