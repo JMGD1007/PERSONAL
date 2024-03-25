@@ -18,9 +18,9 @@ export class PagListVehiculosComponent implements OnInit {
     return this._filtro
   }
 
-  set filtro(_data:string){
-    //this._filtro = this.filtro;
-    this.consultaVehiculos;
+  set filtro(data:string){
+    this._filtro = data;
+    this.consultaVehiculos();
   }
 
   constructor(
@@ -40,7 +40,11 @@ export class PagListVehiculosComponent implements OnInit {
   consultaVehiculos(){
     this.vehiculoService.getVehiculos().subscribe(respuesta => {
       console.log(respuesta);
-      this.listaVehiculos = respuesta;
+      this.listaVehiculos = respuesta.filter(vehiculo => vehiculo.marca.includes(this.filtro));
+      const filtroMinusculas = this.filtro.toLowerCase();
+      this.listaVehiculos = respuesta.filter(vehiculo => 
+      vehiculo.marca.toLowerCase().includes(filtroMinusculas)
+    );
     });
   }
 
@@ -71,6 +75,8 @@ export class PagListVehiculosComponent implements OnInit {
 
     })
   }
+
+  
 
 
 }
