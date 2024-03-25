@@ -66,7 +66,7 @@ export class VehiculoDetalleComponent implements OnInit {
         calificacion: this.calificacion
       };
   
-      this.vehiculoService.actualizarVehiculo(this.vehiculo, this.codigo).subscribe(data => {
+      this.vehiculoService.actualizarVehiculo(datosVehiculo, this.codigo).subscribe(data => {
         console.log('Respuesta del servicio de actualización:', data);
         if (data.codigo == '1') {
           this.vehiculo = datosVehiculo;
